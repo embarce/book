@@ -45,6 +45,7 @@ public class TencentCOS {
 
     /**
      * 简单文件上传, 最大支持 5 GB, 适用于小文件上传, 建议 20 M 以下的文件使用该接口 大文件上传请参照 API 文档高级 API 上传
+     * 返回的是一个文件的url可以直接访问
      *
      * @param localFile
      */
