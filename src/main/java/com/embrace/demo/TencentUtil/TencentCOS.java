@@ -29,11 +29,11 @@ import java.util.concurrent.Executors;
 public class TencentCOS {
 
     // 此处填写的存储桶名称
-    private static final String bucketName = "test-1300625833";
+    private static final String bucketName = "*";
     // secretId
-    private static final String secretId = "AKIDQCznQoZqVv51wfnh2A3g9OO84lDP4gXC";
+    private static final String secretId = "*";
     // secretKey
-    private static final String secretKey = "aGI6eweFi3VjiRv42kCjxxhsPismQq1x";
+    private static final String secretKey = "*";
 
     // 1 初始化用户身份信息(secretId, secretKey，可在腾讯云后台中的API密钥管理中查看！
     private static COSCredentials cred = new BasicCOSCredentials(secretId,secretKey);
