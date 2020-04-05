@@ -24,24 +24,24 @@ public class GoodsController {
 
     @Resource
     private GoodsService goodsService;
-    @PostMapping("setKey")
-    public AppResponse setKey(goodsInfo goodsInfo){
-        try {
-            AppResponse appResponse=goodsService.setKey(goodsInfo);
-            return appResponse;
-        }catch (Exception e){
-            return AppResponse.bizError("新增失败");
-        }
-    }
-    @PostMapping("getKey")
-    public AppResponse getKey(String goodsInfo){
-        try {
-            AppResponse appResponse=goodsService.getKey(goodsInfo);
-            return appResponse;
-        }catch (Exception e){
-            return AppResponse.bizError("查询失败");
-        }
-    }
+//    @PostMapping("setKey")
+//    public AppResponse setKey(goodsInfo goodsInfo){
+//        try {
+//            AppResponse appResponse=goodsService.setKey(goodsInfo);
+//            return appResponse;
+//        }catch (Exception e){
+//            return AppResponse.bizError("新增失败");
+//        }
+//    }
+//    @PostMapping("getKey")
+//    public AppResponse getKey(String goodsInfo){
+//        try {
+//            AppResponse appResponse=goodsService.getKey(goodsInfo);
+//            return appResponse;
+//        }catch (Exception e){
+//            return AppResponse.bizError("查询失败");
+//        }
+//    }
 
     /**
      * 新增商品

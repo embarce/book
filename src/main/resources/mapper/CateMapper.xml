@@ -16,7 +16,8 @@
         is_delete,
         version,
         create_name,
-        create_time
+        create_time,
+        remake
         )
         value (
         #{cateId},
@@ -25,21 +26,22 @@
         0,
         0,
         #{createBy},
-        now()
+        now(),
+        #{remake}
         )
     </insert>
-    <!--新增MQ队列-->
-    <insert id="addMq" parameterType="java.lang.String">
-        insert into t_mq_test
-        (
-        cate,
-        a_time
-        )
-        value (
-        #{json},
-        now()
-        )
-    </insert>
+<!--    &lt;!&ndash;新增MQ队列&ndash;&gt;-->
+<!--    <insert id="addMq" parameterType="java.lang.String">-->
+<!--        insert into t_mq_test-->
+<!--        (-->
+<!--        cate,-->
+<!--        a_time-->
+<!--        )-->
+<!--        value (-->
+<!--        #{json},-->
+<!--        now()-->
+<!--        )-->
+<!--    </insert>-->
     <select id="getCate" resultType="com.embrace.demo.cate.entity.CateInfo">
         select
             cate_id cateId,
@@ -47,7 +49,7 @@
         from t_cate_table
         where cate_id_parent =0
     </select>
-
+    <!--查询父类的子类-->
     <select id="findCateById" parameterType="java.lang.String" resultType="com.embrace.demo.cate.entity.cateParentInfo">
         select
             cate_id cateId,
@@ -55,5 +57,31 @@
         from t_cate_table
         where cate_id_parent=#{chId}
     </select>
-
+    <select id="chekChiById" parameterType="java.lang.String" resultType="int">
+        select
+            count(*)
+        from t_cate_table
+        where cate_id_parent=#{cateId}
+    </select>
+<!--    删除分类-->
+    <update id="delectCateById" parameterType="java.lang.String" >
+        update t_cate_table
+        set
+            is_delete = 1,
+            change_time = now(),
+            change_name=#{lastModifiedBy},
+            version = version + 1
+        where cate_id=#{cateId}
+    </update>
+    <update id="updateCateById" parameterType="java.lang.String" >
+        update t_cate_table
+        set
+            cate_name=#{cateName},
+            remake=#{remake},
+            change_time = now(),
+            change_name=#{lastModifiedBy},
+            version = version + 1
+        where cate_id=#{cateId}
+         and version = #{version}
+    </update>
 </mapper>

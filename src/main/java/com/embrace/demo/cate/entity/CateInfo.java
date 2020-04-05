@@ -51,6 +51,16 @@ public class CateInfo implements Serializable {
      */
     private String version;
 
+    public String getRemake() {
+        return remake;
+    }
+
+    public void setRemake(String remake) {
+        this.remake = remake;
+    }
+
+    private String remake;
+
     /**
      * 子类
      * @return

@@ -73,14 +73,14 @@ public class GoodsService {
     public AppResponse listGoods(goodsInfo goodsInfo){
         PageHelper.startPage(goodsInfo.getPageNum(), goodsInfo.getPageSize());
         List<goodsInfo> goodsInfoList = goodsDao.listGoodsByPage(goodsInfo);
-        if(null==redisOperator.get("goods1")){
+//        if(null==redisOperator.get("goods1")){
             // 包装Page对象
             PageInfo<goodsInfo> pageData = new PageInfo<goodsInfo>(goodsInfoList);
             String jsonString=JsonUtils.toJson(pageData);
-            redisOperator.set("goods1",jsonString,60*5);
+//            redisOperator.set("goods1",jsonString,60*5);
             return AppResponse.success("查询成功！",pageData);
-        }
-        else return AppResponse.bizError("新增失败redis已存在");
+//        }
+//        else return AppResponse.bizError("新增失败redis已存在");
     }
 
     /**

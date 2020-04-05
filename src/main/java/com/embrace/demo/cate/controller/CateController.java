@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/cate")
 public class CateController {
-    private static final Logger logger = LoggerFactory.getLogger(CarouserlController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CateController.class);
     @Resource
     private CateService cateService;
     @PostMapping("addCate")
@@ -41,6 +41,24 @@ public class CateController {
             return  appResponse;
         }catch (Exception e){
             return AppResponse.bizError(e.toString());
+        }
+    }
+    @PostMapping("delectCateById")
+    public AppResponse delectCateById(String cateId){
+        try{
+            AppResponse appResponse=cateService.delectCateById(cateId);
+            return appResponse;
+        }catch (Exception e){
+            return AppResponse.bizError(e.toString());
+        }
+    }
+    @PostMapping("updateCateById")
+    public AppResponse updateCateById(CateInfo cateInfo){
+        try{
+            AppResponse appResponse=cateService.updateCateById(cateInfo);
+            return  appResponse;
+        }catch (Exception e){
+            return AppResponse.bizError("修改失败");
         }
     }
 }

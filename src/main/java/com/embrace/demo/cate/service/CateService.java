@@ -1,7 +1,4 @@
 package com.embrace.demo.cate.service;
-
-import com.embrace.demo.activcemq.producer.ProducerController;
-import com.embrace.demo.carouselPicture.dao.CarouserlDao;
 import com.embrace.demo.cate.dao.CateDao;
 import com.embrace.demo.cate.entity.CateInfo;
 import com.embrace.demo.cate.entity.cateParentInfo;
@@ -23,8 +20,8 @@ import java.util.List;
 public class CateService {
     @Resource
     private CateDao cateDao;
-    @Resource
-    private ProducerController producerController;
+//    @Resource
+//    private ProducerController producerController;
 
     /**
      * 新增分类
@@ -37,11 +34,10 @@ public class CateService {
         cateInfo.setIsDeleted(0);
         cateInfo.setCreateBy("1");
         int num=cateDao.countCateByName(cateInfo.getCateName());
-        producerController.sendQueue(cateInfo);
+//        producerController.sendQueue(cateInfo);
         //新增
         if(num==0){
             int count=cateDao.addCate(cateInfo);
-            cateDao.addMq(JsonUtils.toJson(cateInfo));
             if(0==count){
                 return AppResponse.bizError("新增失败，请重试");
             }
@@ -51,6 +47,11 @@ public class CateService {
             return AppResponse.success("分类已存在");
         }
     }
+
+    /**
+     * 查询分类列表
+     * @return
+     */
     public AppResponse getCate(){
         List<CateInfo> infos=cateDao.getCate();
         for (CateInfo cateP : infos) {
@@ -59,5 +60,36 @@ public class CateService {
         }
 
         return AppResponse.success("get",infos);
+    }
+
+    /**
+     * 删除分类
+     * @param cateId
+     * @return
+     */
+    public AppResponse delectCateById(String cateId){
+        int count=cateDao.chekChiById(cateId);
+        String lastModifiedBy="embrace";
+        if(count==0){
+            int num=cateDao.delectCateById(cateId,lastModifiedBy);
+            if(num>0){
+                return AppResponse.success("删除成功");
+            }
+            else {
+                return AppResponse.bizError("删除失败");
+            }
+        }else {
+            return AppResponse.bizError("存在子类，删除失败");
+        }
+    }
+    public AppResponse updateCateById(CateInfo cateInfo){
+        cateInfo.setLastModifiedBy("embrace");
+        int count=cateDao.updateCateById(cateInfo);
+        if(count==0){
+            return AppResponse.bizError("修改失败");
+        }
+        else {
+            return AppResponse.success("修改成功");
+        }
     }
 }

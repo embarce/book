@@ -8,14 +8,14 @@ spring:
     database: 0
     host: 127.0.1.1
     port: 6379
-  activemq:
-    user: admin
-    password: admin
-    broker-url: tcp://127.0.0.1:61616
-    packages: trus-all=true
-  jms:
-    topic-name: topic
-    queue-name: queue
+#  activemq:
+#    user: admin
+#    password: admin
+#    broker-url: tcp://127.0.0.1:61616
+#    packages: trus-all=true
+#  jms:
+#    topic-name: topic
+#    queue-name: queue
 #  tengxun:
 #    accessKey: AKIDQCznQoZqVv51wfnh2A3g9OO84lDP4gXC
 #    secretKey: aGI6eweFi3VjiRv42kCjxxhsPismQq1x

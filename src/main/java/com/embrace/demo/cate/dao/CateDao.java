@@ -34,6 +34,28 @@ public interface CateDao {
      * @return
      */
     List<cateParentInfo> findCateById(String chId);
-    int addMq(String json);
+//
+//    int addMq(String json);
+
+    /**
+     * 删除分类
+     * @param cateId
+     * @return
+     */
+    int delectCateById(String cateId,String lastModifiedBy);
+
+    /**
+     * 检查是否有子类存在
+     * @param cateId
+     * @return
+     */
+    int chekChiById(String cateId);
+
+    /**
+     * 修改分类
+     * @param cateInfo
+     * @return
+     */
+    int updateCateById(CateInfo cateInfo);
 
 }
